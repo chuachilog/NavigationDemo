@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.Navigation
 import com.example.navigationdemo.databinding.FragmentQuestionBinding
@@ -83,7 +84,11 @@ class QuestionFragment : Fragment() {
                     binding.radioGroup.clearCheck()
                     setQuestion()
                 }else{
-                    Navigation.findNavController(it).navigate(R.id.action_questionFragment_to_thankyouFragment)
+                    val totalScore : Float = (score / 2.0F) * 100
+
+                    val bundle = bundleOf( Pair("score",totalScore))
+                    
+                    Navigation.findNavController(it).navigate(R.id.action_questionFragment_to_thankyouFragment,bundle)
                 }
             }else{
                 Toast.makeText(context,"Please Select answer",Toast.LENGTH_LONG).show()
